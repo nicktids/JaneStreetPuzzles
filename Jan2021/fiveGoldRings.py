@@ -1,6 +1,7 @@
 #%%
 import numpy as np
 import pandas as pd
+import joblib
 
 
 #%%
@@ -44,7 +45,7 @@ seed = 887234809
 np.random.seed(seed)
 num = []
 #%%
-for x in range(200000000):
+for x in range(300000):
     np.random.shuffle(bag)
     idx = bag.index(startbag[0])
     new_num = check_bag(bag[:idx], startbag)
@@ -53,6 +54,12 @@ print(f"done {len(num)}")
 # %%
 num_arr = np.array(num)
 num_arr.mean()
+
+#%%
+joblib.dump(num, "output")
+
+#%%
+num = joblib.load("output")
 
 # %%
 # orig 6.858887333333334#
@@ -65,7 +72,7 @@ num_arr.mean()
 # 100m 6.85990 199 & 6.85961 363
 # 200m 6.85964 3675
 # 300m 6.85974 0413333333
-# 500m
+# 500m 6.85971 6449937726
 
 
 # %%
